@@ -17,16 +17,16 @@ public class PersonaRepository {
     }
     @Transactional
     public void insertar(Persona persona) {
-        plantilla.update("insert into Personas (nombre, apellidos, edad) values (?,?,?)",
+        plantilla.update("insert into personas (nombre, apellidos, edad) values (?,?,?)",
                 persona.getNombre(), persona.getApellidos(), persona.getEdad());
     }
 
     public List<Persona> buscarTodos() {
-        return plantilla.query("select * from Personas",new PersonaMapper());
+        return plantilla.query("select * from personas",new PersonaMapper());
     }
 
     public Persona buscarUno(String nombre) {
-        List<Persona> resultados = plantilla.query("select * from Personas where nombre=?",new PersonaMapper(),nombre);
+        List<Persona> resultados = plantilla.query("select * from personas where nombre=?",new PersonaMapper(),nombre);
         if (resultados.isEmpty()) {
             System.out.println("No se encontró ningún resultado para: " + nombre);
             return null;
@@ -37,10 +37,10 @@ public class PersonaRepository {
     }
     @Transactional
     public void borrar(Persona persona) {
-        plantilla.update("delete from Personas where nombre=?",persona.getNombre());
+        plantilla.update("delete from personas where nombre=?",persona.getNombre());
     }
     @Transactional
     public void borrarTodos() {
-        plantilla.update("delete from Personas");
+        plantilla.update("delete from personas");
     }
 }
